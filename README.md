@@ -1,108 +1,110 @@
-<h1 align="center" style="font-size:28px; line-height:1"><b>Grocery Genius</b></h1>
+# Grocery Genius (Fork)
 
-<div align="center">
-  <img alt="Grocery Genius logo" src="images/app_logo_rounded_corners.svg" height="150px">
-</div>
+A free, customizable Android shopping list app with a modern grid design, autocomplete suggestions, offline support, **reminders**, and **list sharing**.
 
-<br />
+> **This is a fork of [Grocery Genius](https://github.com/DanielRendox/GroceryGenius) by [Daniel Rendox](https://github.com/DanielRendox).**
+> All credit for the original app, architecture, and design goes to the original author. See [What's new in this fork](#whats-new-in-this-fork) for my additions.
 
-<div align="center">
+## Screenshots
 
-[<img src="images/banners/banner_github.png"
-      alt="Get it on GitHub"
-      height="80">](https://github.com/DanielRendox/GroceryGenius/releases)
-[<img src="images/banners/banner_izzy_on_droid.png"
-      alt="Get it on IzzyOnDroid"
-      height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.rendox.grocerygenius)
-[<img src="images/banners/banner_google_play.png" 
-      alt="Get it on Google Play"
-      height="80">](https://play.google.com/store/apps/details?id=com.rendox.grocerygenius)
+| Multiple grocery lists | Reminders | Share lists |
+|:---:|:---:|:---:|
+| <img src="screeshots/list.jpeg" width="250"> | <img src="screeshots/reminder.jpeg" width="250"> | <img src="screeshots/share.jpeg" width="250"> |
 
-</div>
+## What's new in this fork
 
-<br />
-<br />
-
-![Routine Tracker GitHub cover image](images/readme/readme_cover_image.png)
-
-|                                                 |                                               |                                              |
-|-------------------------------------------------|-----------------------------------------------|----------------------------------------------|
-| ![](images/readme/feature_search_groceries.png) | ![](images/readme/feature_separate_lists.png) | ![](images/readme/feature_customization.png) |
-
-Grocery Genius is a free, customizable shopping list app with a modern design, autocomplete suggestions, offline capabilities, and feature-rich functionality.
+- **Create multiple grocery lists:** make as many separate lists as you need (weekly shop, party, pharmacy, etc.).
+- **Reminders:** set a reminder and get notified when it's time to shop.
+- **Share grocery lists:** send a list to WhatsApp or any other app through the Android share sheet.
 
 ## Features
 
-- **Add groceries with a few clicks.** The app has a database of over 130 predefined groceries, each with its own icon. Type as few as two letters, and the best matching items will quickly appear.
-- **Add, Edit, and Delete Groceries.** If your grocery item isn’t in the database, it will be created automatically. You can then categorize it, assign an icon, remove it from the list, or delete it entirely.
-- **Modern Design.** Unlike many shopping list apps that use a list view, Grocery Genius features a grid view with attractive icons and color-coded separation for purchased and unpurchased items. Groceries are sorted by category, mirroring their placement in stores. The app’s design follows Material You practices, offering dynamic color, dark and light modes, and six color schemes to choose from.
-- **Manage Separate Lists.** Create multiple grocery lists and easily reorder them on the main screen with drag-and-drop functionality.
-- **Customization.** You can choose a default grocery list, reorder categories, switch between dark and light modes, and choose a different color scheme in the settings.
-- **Offline Mode.** Initially, the app requires an internet connection to fetch predefined groceries. After that, you can use it fully offline.
-- **Completely Free.** Grocery Genius is free and open source, with no limitations. Add as many grocery lists as you want. All features available now will remain free forever.
-- **Respects Your Privacy.** Your confidential data always remains on your device.  Neither the developers nor any third parties have access to your information. For more details, see the [Privacy Policy](https://github.com/DanielRendox/GroceryGenius/blob/develop/PRIVACY_POLICY.md).
-
-## Roadmap
-
-These features may or may not be implemented in the long term.
-- Sharing grocery lists with other people
-- Location reminders
-- Adding photos to items
-- Adding items using voice
+- **Add groceries in a few taps.** 130+ predefined groceries, each with its own icon. Type two letters and the best matches appear.
+- **Add, edit, and delete groceries.** Items not in the database are created automatically; categorize them, assign an icon, or remove them.
+- **Modern design.** A grid view with icons, color-coded purchased/unpurchased items, and groceries sorted by store category. Follows Material You with dynamic color, dark/light modes, and six color schemes.
+- **Manage separate lists.** Create multiple lists and reorder them with drag-and-drop.
+- **Reminders.** Never forget a shopping trip.
+- **Share lists.** Send a list to family, friends, or roommates.
+- **Customization.** Default list, category order, theme, and color scheme.
+- **Offline mode.** An internet connection is only needed on first launch to fetch the predefined groceries.
+- **Free and open source.** No limits, no ads.
 
 ## Get the app
 
-You can install the app from the [GitHub releases](https://github.com/DanielRendox/GroceryGenius/releases) page or build it yourself by [cloning the project](https://docs.github.com/articles/cloning-a-repository) and launching it in the latest version of [Android Studio](https://developer.android.com/studio).
+Download the APK from the [Releases](https://github.com/aroobaaaaaaaa/Grocery-Genius/releases) page, or build it yourself:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aroobaaaaaaaa/Grocery-Genius.git
+   ```
+2. Open it in the latest version of [Android Studio](https://developer.android.com/studio).
+3. Let Gradle sync, then run the `app` configuration on a device or emulator.
 
 ## Tech stack
 
-- Jetpack Compose for the user interface, with a single Activity and no Fragments
-- Room database for local data storage
-- Retrofit for working with REST API
-- Preferences DataStore for storing simple data in key-value form
-- Kotlin coroutines and flow for asynchronous requests
-- Work Manager for synching data in the background
-- Moshi for decoding JSON files into Kotlin objects
-- Coil for loading images from files in a performant way
-- RecyclerView for lists with drag-and-drop functionality
-- MVI pattern
-- CLEAN architecture with data and presentation layer
+- Jetpack Compose (single Activity, no Fragments)
+- Hilt for dependency injection
+- Room for local storage
+- Retrofit + Moshi for networking and JSON decoding
+- Preferences DataStore for simple key-value data
+- Kotlin coroutines and Flow
+- WorkManager for background sync
+- Coil for image loading
+- RecyclerView + ItemTouchHelper for drag-and-drop
+- MVI pattern with a CLEAN architecture (data and presentation layers)
 
-## Some Technical Stuff
+## Project structure
 
-1. The app has predefined groceries that the database should be prepopulated with after installation. Grocery Genius aims to further scale towards online grocery list sharing, so this data has to be fetched from the server, rather than being bundled in the APK. Since there is currently no backend for this app, the data is fetched directly from the top-level "assets" folder in this GitHub repository (production branch) using GitHub REST API. While GitHub may not be very suitable for file hosting, this is convenient as it only takes to update the data here and it will be reflected on all devices. Here is how it works:
-    - A WorkManager task gets executed on each app startup and synchronizes each repository's data sequentially. The synchronization logic for each repository is defined in its sync function. Some helper functions are used to unify the sync process and catch exceptions that may happen. 
-    - During the synchronization process each repository checks for updates by fetching change list versions and comparing the latest version with the local one, which is saved in Preferences DataStore. If the local data is outdated, it fetches the latest data from the network and then caches it in the local database.
-    - The app doesn't use Coil to fetch images from the server directly. That's because although Coil can store images permanently on the device's internal storage, it loads images on demand. This means that if we relied solely on Coil, some grocery images might not have been displayed when the user's device went offline because they hadn't been fetched previously. Since the app is designed to be fully functional without an internet connection, we instead manually fetch all images from the network, save them to the app's internal storage, and then use Coil to load them in the UI performantly.
-    - If the sync is happening for the first time, the app detects that and fetches the archive of grocery images instead of making an HTTP request for each of them.
+```
+app/src/main/kotlin/com/rendox/grocerygenius/
+├── data/            # Repositories (category, grocery, grocerylist, icons, product, userpreferences) and models
+├── database/        # Room DAOs and entities
+├── datastore/       # Preferences and change-list version data sources
+├── feature/         # UI features, each with its own ViewModel, UI state, and intents
+│   ├── addgrocery/
+│   ├── dashboardscreen/
+│   ├── editgrocery/
+│   ├── grocerylist/
+│   ├── iconpicker/
+│   ├── onboarding/
+│   └── settings/
+├── filestorage/     # Asset saving, JSON decoding, unzip utilities
+├── model/           # Shared domain models
+├── network/         # GitHub API, data sources, DI
+├── sync/work/       # Background sync with WorkManager
+└── ReminderReceiver # Reminder notifications
+```
 
-2. Drag and drop functionality in the Dashboard and Settings screens is achieved by integrating RecyclerView and ItemTouchHelper with Jetpack Compose. In this setup, composables are items in the RecyclerView, which is in turn a child view in the composable hierarchy. RecyclerView is used because Jetpack Compose doesn't have an official drag-and-drop feature yet.
+## How it works
 
-## Let’s work together!
+Predefined groceries are not bundled in the APK. They are fetched from the top-level `assets` folder of the original repository using the GitHub REST API, then cached locally in Room:
 
-Grocery Genius is an open-source project that welcomes contributions! If you're inclined to offer support in any of the following areas:
+- A WorkManager task runs on each app startup and syncs each repository in sequence.
+- Each repository compares the remote change-list version with the local one (stored in DataStore) and only downloads data when it's outdated.
+- Images are downloaded and saved to internal storage (rather than loaded on demand by Coil), so the app stays fully functional offline. On first sync, an archive of all images is fetched in one request.
+- Drag-and-drop on the Dashboard and Settings screens uses RecyclerView and ItemTouchHelper embedded in Compose, since Compose has no official drag-and-drop yet.
 
-- Building a backend for this app to introduce real-time grocery list-sharing
-- Developing features in the [Roadmap](https://github.com/DanielRendox/GroceryGenius/tree/develop#roadmap)
-- Porting to iOS
-- Design enhancements,
-- Translation to different languages,
-- Promotion, and spreading the word about the app
-- Identifying and reporting bugs,
-- Or any other contributions you might have in mind,
+## Privacy
 
-and are willing to do so **voluntarily**, please don't hesitate to open an issue, submit a PR, or reach out to [me](https://github.com/DanielRendox) directly.
+All data you enter is stored locally on your device. There are no ads, no analytics, and no registration. The app does not ask for your name, email, phone number, or other personal information.
 
-Whether you're a seasoned developer or just looking to hone your skills, your contributions are much appreciated.
+The internet is used to fetch and update the grocery database from GitHub. `<If your sharing feature sends data anywhere other than via the Android share sheet, describe it here.>`
 
-Please note, as per the [GitHub Terms of Service](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license), any code contributions will be licensed under the GPL v3, as it is the license of the original project.
+See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details.
 
-### 🌍 Translations
+## Contributing
 
-If you’d like to help translate the app into different languages, please join the [translation project](https://crowdin.com/project/grocery-genius). Start by translating grocery item names in `default_products.json`, as it is the most important part, then move on to category names, app strings, and the remaining content. If a translation is already completed, you're welcome to vote on the strings or suggest your own version if you feel the existing one could be improved.
+Issues and pull requests are welcome, whether it's bug reports, translations, design improvements, or new features.
+
+Translations for the original app are managed on [Crowdin](https://crowdin.com/project/grocery-genius).
 
 ## License
 
-The project is licensed under the GPL, which means that you can freely build on top of it for commercial and non-commercial purposes alike. But should you choose to incorporate its code, you must open-source your project and apply the GPL license to it as well. Check out the [LICENSE](https://github.com/DanielRendox/GroceryGenius/blob/develop/LICENSE) file for more details.
+This project is licensed under the **GNU General Public License v3.0**, the same license as the original project. See [LICENSE](LICENSE).
 
-However, it does not apply to grocery icons contained in the top-level `assets/icons` folder, and its duplicates inside `app/src/debug/assets/icons`. They were generated by Bing Image Creator and Recraft AI and are owned by the companies behind these services respectively. No commercial use of these icons is allowed.
+**Grocery icons are excluded.** The icons in `assets/icons` (and their duplicates in `app/src/debug/assets/icons`) were generated by Bing Image Creator and Recraft AI and are owned by the companies behind those services. **No commercial use of these icons is allowed.**
+
+## Credits
+
+- Original app: [Grocery Genius](https://github.com/DanielRendox/GroceryGenius) by [Daniel Rendox](https://github.com/DanielRendox)
+- Fork maintained by [arooba](https://github.com/aroobaaaaaaaa)
