@@ -7,4 +7,5 @@ fun GroceryList.asEntity() = GroceryListEntity(
     id = id,
     name = name,
     sortingPriority = sortingPriority
+
 )

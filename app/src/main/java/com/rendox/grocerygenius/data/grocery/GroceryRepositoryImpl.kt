@@ -1,6 +1,7 @@
 package com.rendox.grocerygenius.data.grocery
 
 import com.rendox.grocerygenius.data.model.asExternalModel
+import com.rendox.grocerygenius.database.grocery.CombinedGrocery
 import com.rendox.grocerygenius.database.grocery.GroceryDao
 import com.rendox.grocerygenius.database.grocery.GroceryEntity
 import com.rendox.grocerygenius.database.product.ProductDao
@@ -30,6 +31,9 @@ class GroceryRepositoryImpl @Inject constructor(
                 purchasedLastModified = purchasedLastModified
             )
         )
+    }
+    override fun getCombinedGroceriesFromList(listId: String): Flow<List<CombinedGrocery>> {
+        return groceryDao.getGroceriesFromList(listId)
     }
 
     override suspend fun insertProductAndGrocery(

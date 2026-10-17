@@ -1,5 +1,5 @@
 package com.rendox.grocerygenius.data.grocery
-
+import com.rendox.grocerygenius.database.grocery.CombinedGrocery
 import com.rendox.grocerygenius.model.Grocery
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +13,7 @@ interface GroceryRepository {
         purchased: Boolean,
         purchasedLastModified: Long = System.currentTimeMillis()
     )
+    fun getCombinedGroceriesFromList(listId: String): Flow<List<CombinedGrocery>>
 
     suspend fun insertProductAndGrocery(
         name: String,

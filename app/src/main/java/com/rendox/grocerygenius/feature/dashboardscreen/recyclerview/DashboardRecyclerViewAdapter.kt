@@ -5,13 +5,18 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.rendox.grocerygenius.data.grocery.GroceryRepository
 import com.rendox.grocerygenius.model.GroceryList
 import com.rendox.grocerygenius.ui.helpers.DragHandleReorderItemTouchHelperCallback
 import java.util.Collections
+import com.rendox.grocerygenius.database.grocery.CombinedGrocery
 
 class DashboardRecyclerViewAdapter(
     recyclerView: RecyclerView,
+    private val groceryRepository: GroceryRepository,
+
     var groceryLists: List<GroceryList>,
+    private val groceryMap: Map<String, List<CombinedGrocery>>,
     private val updateLists: (List<GroceryList>) -> Unit,
     private val onItemClicked: (String) -> Unit,
     private val onAdderItemClicked: () -> Unit
@@ -44,7 +49,8 @@ class DashboardRecyclerViewAdapter(
         VIEW_TYPE_GROCERY_LIST -> DashboardItemViewHolder(
             composeView = ComposeView(parent.context),
             onDrag = { touchHelper.startDrag(it) },
-            onViewClicked = onItemClicked
+            onViewClicked = onItemClicked,
+            groceryRepository = groceryRepository
         )
         VIEW_TYPE_ADDER -> GroceryListAdderItemViewHolder(
             composeView = ComposeView(parent.context),

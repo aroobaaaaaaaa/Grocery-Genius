@@ -17,6 +17,7 @@ interface GroceryDao {
         """
         SELECT
             grocery.productId,
+            grocery.groceryListId as groceryListId,
             product.name,
             grocery.purchased,
             grocery.description,
@@ -38,23 +39,24 @@ interface GroceryDao {
 
     @Query(
         """
-        SELECT
-            grocery.productId,
-            product.name,
-            grocery.purchased,
-            grocery.description,
-            icon.uniqueFileName as iconId,
-            icon.filePath as iconFilePath,
-            category.id as categoryId,
-            category.name as categoryName,
-            category.sortingPriority as categorySortingPriority,
-            grocery.purchasedLastModified,
-            product.isDefault as productIsDefault
-        FROM GroceryEntity grocery
-        INNER JOIN ProductEntity product ON grocery.productId = product.id
-        LEFT JOIN CategoryEntity category ON product.categoryId = category.id
-        LEFT JOIN IconEntity icon ON product.iconFileName = icon.uniqueFileName
-        WHERE grocery.productId = :productId AND grocery.groceryListId = :listId
+    SELECT
+        grocery.productId,
+        product.name,
+        grocery.purchased,
+        grocery.groceryListId as groceryListId,
+        grocery.description,
+        icon.uniqueFileName as iconId,
+        icon.filePath as iconFilePath,
+        category.id as categoryId,
+        category.name as categoryName,
+        category.sortingPriority as categorySortingPriority,
+        grocery.purchasedLastModified,
+        product.isDefault as productIsDefault
+    FROM GroceryEntity grocery
+    INNER JOIN ProductEntity product ON grocery.productId = product.id
+    LEFT JOIN CategoryEntity category ON product.categoryId = category.id
+    LEFT JOIN IconEntity icon ON product.iconFileName = icon.uniqueFileName
+    WHERE grocery.productId = :productId AND grocery.groceryListId = :listId
     """
     )
     fun getGrocery(
@@ -94,7 +96,30 @@ interface GroceryDao {
         productId: String,
         listId: String
     )
+    @Query(
+        """
+    SELECT
+        grocery.groceryListId,
+        grocery.productId,
+        product.name,
+        grocery.purchased,
+        grocery.description,
+        icon.uniqueFileName as iconId,
+        icon.filePath as iconFilePath,
+        category.id as categoryId,
+        category.name as categoryName,
+        category.sortingPriority as categorySortingPriority,
+        grocery.purchasedLastModified,
+        product.isDefault as productIsDefault
+    FROM GroceryEntity grocery
+    INNER JOIN ProductEntity product ON grocery.productId = product.id
+    LEFT JOIN CategoryEntity category ON product.categoryId = category.id
+    LEFT JOIN IconEntity icon ON product.iconFileName = icon.uniqueFileName
+    """
+    )
+    fun getAllGroceries(): Flow<List<CombinedGrocery>>
 
     @Query("SELECT COUNT(productId) FROM GroceryEntity WHERE groceryListId = :listId")
     fun getNumOfGroceriesInList(listId: String): Flow<Int>
+
 }

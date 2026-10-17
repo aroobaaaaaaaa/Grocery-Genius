@@ -17,9 +17,6 @@ object DaosModule {
     fun providesCategoryDao(appDatabase: AppDatabase): CategoryDao = appDatabase.categoryDao()
 
     @Provides
-    fun providesGroceryDao(appDatabase: AppDatabase): GroceryDao = appDatabase.groceryDao()
-
-    @Provides
     fun providesGroceryListDao(appDatabase: AppDatabase): GroceryListDao = appDatabase.groceryListDao()
 
     @Provides

@@ -36,6 +36,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -59,6 +62,17 @@ class MainActivity : ComponentActivity() {
 
         splashScreen.setKeepOnScreenCondition {
             uiState == null
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1002
+                )
+            }
         }
 
         val statusBarLightScrim = ContextCompat.getColor(this, R.color.status_bar_light_scrim)
